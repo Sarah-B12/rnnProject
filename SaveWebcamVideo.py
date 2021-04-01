@@ -21,7 +21,7 @@ for x in range (14,20):
 x = x + 1
 
 
-# close the already opened cameraa
+# close the already opened camera
 vid_capture.release()
 # close the already opened file
 output.release()
