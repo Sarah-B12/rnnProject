@@ -4,7 +4,7 @@ from keras.models import load_model
 import numpy as np
 
 
-seq_len = 150
+seq_len = 75
 classes = ["Fight", "NonFight"]
 img_height, img_width = 64, 64
 known_Y = True
@@ -19,11 +19,9 @@ def frames_extraction(video_path):
     while count <= seq_len:
 
         success, image = vidObj.read()
-        if success and (count % 2) == 0:
+        if success:
             image = cv2.resize(image, (img_height, img_width))
             frames_list.append(image)
-            count += 1
-        elif (count % 2) != 0:
             count += 1
         else:
             print("Defected frame")
@@ -57,7 +55,7 @@ def create_data(input_dir, known_Y):
                     counter += 1
                 '''
 
-                if len(frames) == seq_len/2:
+                if len(frames) == seq_len:
                     X.append(frames)
                     y = [0] * len(classes)
                     y[classes.index(c)] = 1
@@ -69,7 +67,7 @@ def create_data(input_dir, known_Y):
             files_list.remove(".DS_Store")
         for f in files_list:
             frames = frames_extraction(os.path.join(input_dir, f))
-            if len(frames) == seq_len / 2:
+            if len(frames) == seq_len:
                 X.append(frames)
 
     X = np.asarray(X)
