@@ -109,7 +109,9 @@ model.add(ConvLSTM2D(filters=64, kernel_size=(3, 3), return_sequences=False, dat
                      input_shape=(int(seq_len/2), img_height, img_width, 3)))
 model.add(Dropout(0.2))
 model.add(Flatten())
-model.add(Dense(256, activation="relu"))
+model.add(Dense(512, activation="relu"))
+model.add(Dropout(0.3))
+model.add(Dense(512, activation="relu"))
 model.add(Dropout(0.3))
 model.add(Dense(2, activation="sigmoid"))
 

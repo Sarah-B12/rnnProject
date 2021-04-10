@@ -4,7 +4,7 @@ vid_capture = cv2.VideoCapture(0)
 vid_capture.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
 vid_capture.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
 vid_cod = cv2.VideoWriter_fourcc(*'XVID')
-path = "video_data/cam_video"
+path = "video_pred/cam_video"
 
 for x in range (14,20):
      counter = 0
