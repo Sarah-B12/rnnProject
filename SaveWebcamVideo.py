@@ -6,7 +6,7 @@ vid_capture.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
 vid_cod = cv2.VideoWriter_fourcc(*'XVID')
 path = "video_data/cam_video"
 
-for x in range (14,20):
+for x in range (1,14):
      counter = 0
      output = cv2.VideoWriter(path+str(x)+".avi", vid_cod, 30.0, (1280, 720))
      while(True):
