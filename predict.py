@@ -104,5 +104,3 @@ while True:
     for i in range(len(files_list)):
         print("X=%s, Predicted=%s" % (files_list[i], y_pred_unknown[i]))
     '''
-
-# TODO : work in parallel with SaveWebCamVid and move to folders Fight NoFight
