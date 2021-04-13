@@ -23,7 +23,7 @@ from sklearn.metrics import multilabel_confusion_matrix
 data_dir = "video_data_3/"
 seq_len = 150
 classes = ["Fight", "NonFight"]
-img_height, img_width = 64, 64
+img_height, img_width = 350, 350
 known_Y = True
 # known_Y = True if test or train
 
