@@ -20,7 +20,7 @@ from sklearn.metrics import cohen_kappa_score
 from sklearn.metrics import roc_auc_score
 from sklearn.metrics import multilabel_confusion_matrix
 
-data_dir = "video_data/"
+data_dir = "video_data_3/"
 seq_len = 150
 classes = ["Fight", "NonFight"]
 img_height, img_width = 64, 64
@@ -120,7 +120,7 @@ model.summary()
 opt = keras.optimizers.SGD(lr=0.001)
 model.compile(loss='binary_crossentropy', optimizer=opt, metrics=["accuracy"])
 
-earlystop = EarlyStopping(patience=7)
+earlystop = EarlyStopping(monitor='val_loss', mode='min', patience=7)
 callbacks = [earlystop]
 
 
