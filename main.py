@@ -1,16 +1,21 @@
-# This is a sample Python script.
-
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
+import glob
+import cv2
+from pathlib import Path
+from dynamicImage import get_dynamic_image
 
 
-# Press the green button in the gutter to run the script.
+def main():
+    # Load the frames from the 'example_frames' folder and sort them numerically. This assumes that your frames
+    # are enumerated as 0001.jpg, 0002.jpg, etc.
+    frames = glob.glob('./example_frames/*.jpg')
+    frames = sorted(frames, key=lambda x: int(Path(x).stem))
+    frames = [cv2.imread(f) for f in frames]
+
+    # Generate and display a normalized dynamic image.
+    dyn_image = get_dynamic_image(frames, normalized=True)
+    cv2.imshow('', dyn_image)
+    cv2.waitKey()
+
+
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    main()
