@@ -52,8 +52,7 @@ def frames_extraction(video_path):
             break
         if (count % 10) == 0:
             dyn_image = get_dynamic_image(frames_list, normalized=True)
-            # cv2.imshow('', dyn_image)
-            # cv2.waitKey()
+            cv2.imwrite("a.jpg", dyn_image)
             dyn_image_list.append(dyn_image)
             frames_list.clear()
 
