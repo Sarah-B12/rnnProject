@@ -11,6 +11,7 @@ import os
 import cv2
 import numpy as np
 from sklearn.model_selection import train_test_split
+from dynamicImage import get_dynamic_image
 
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 from sklearn.metrics import precision_score
@@ -20,10 +21,10 @@ from sklearn.metrics import cohen_kappa_score
 from sklearn.metrics import roc_auc_score
 from sklearn.metrics import multilabel_confusion_matrix
 
-data_dir = "video_data_3/"
+data_dir = "video_data_test/"
 seq_len = 150
 classes = ["Fight", "NonFight"]
-img_height, img_width = 250, 250
+img_height, img_width = 400, 400
 known_Y = True
 # known_Y = True if test or train
 
@@ -31,6 +32,7 @@ known_Y = True
 
 def frames_extraction(video_path):
     frames_list = []
+    dyn_image_list = []
 
     vidObj = cv2.VideoCapture(video_path)
     # Used as counter variable
@@ -48,8 +50,14 @@ def frames_extraction(video_path):
         else:
             print("Defected frame")
             break
+        if (count % 10) == 0:
+            dyn_image = get_dynamic_image(frames_list, normalized=True)
+            # cv2.imshow('', dyn_image)
+            # cv2.waitKey()
+            dyn_image_list.append(dyn_image)
+            frames_list.clear()
 
-    return frames_list
+    return dyn_image_list
 
 
 def create_data(input_dir, known_Y):

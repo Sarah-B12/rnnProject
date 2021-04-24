@@ -1,3 +1,7 @@
+'''
+https://github.com/tcvrick/dynamic-images-for-action-recognition
+'''
+
 import cv2
 import numpy as np
 
