@@ -1,37 +1,43 @@
+import os
 import tkinter as tk
 from tkinter import ttk
 from random import randint
+import shutil
 
-tempList = ["aa", "bb"], ["gal", "sap"]
+fight_videos = ["here", "be"], ["the", "videos"]
+
 
 UI = tk.Tk()
-
-def CreateList():
-    i = 0
-    while (i<100000000): #time for waiting for new video demo
-        i= i + 1
-    global tempList
-    label = tk.Label(UI, text="Fight Videos", font=("Arial", 30)).grid(row=0, columnspan=3)
-    cols = ('Name of video', 'Why the video is violent')
-    listBox = ttk.Treeview(UI, columns=cols, show='headings')
-    for col in cols:
-        listBox.heading(col, text=col)
-    listBox.grid(row=1, column=0, columnspan=2)
-
-    #update the array with new values
-    new_num1 = str(randint(0,1000))
-    new_num2 = str(randint(0,1000))
-    tempList = tempList + ((new_num1, new_num2),)
+label = tk.Label(UI, text="Fight Videos", font=("Arial", 30)).grid(row=0, columnspan=3)
+cols = ('Name of video', 'Why the video is violent')
+listBox = ttk.Treeview(UI, columns=cols, show='headings')
+for col in cols:
+    listBox.heading(col, text=col)
+listBox.grid(row=1, column=0, columnspan=2)
 
 
-    for i, (name, score) in enumerate(tempList, start=1):
-        listBox.insert("", "end", values=(name, score))
+def UpdateList():
+    global fight_videos
+    data_dir = 'video_forBD/Fight'
+    files = os.listdir(data_dir)
+    if files:  # if folder Fight is not empty
+        current_vid = files[0]
 
+        #update the array with new values
+        new_num1 = str(randint(0,1000))
+        new_num2 = str(randint(0,1000))
+        current_vid_results = ((new_num1, new_num2),)
+
+
+        for i, (name, score) in enumerate(current_vid_results, start=1):
+            listBox.insert("", "end", values=(name, score))
+
+        shutil.move(os.path.join(data_dir, current_vid), 'video_forBD/Fight_Tested')
 #   showScores = tk.Button(UI, text="Continue", command=UI.destroy).grid()
-    UI.after(2000, CreateList)  # run itself again after 2000 ms
+    UI.after(2000, UpdateList)  # run itself again after 2000 ms
 
 
-CreateList() #show the list
+UpdateList()  # show the list
 closeButton = tk.Button(UI, text="Close", width=15, command=exit).grid(row=4, column=1)
 UI.mainloop()
 
