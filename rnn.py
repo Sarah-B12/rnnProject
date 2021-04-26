@@ -21,10 +21,10 @@ from sklearn.metrics import cohen_kappa_score
 from sklearn.metrics import roc_auc_score
 from sklearn.metrics import multilabel_confusion_matrix
 
-data_dir = "video_data_test/"
+data_dir = "video_data_3/"
 seq_len = 150
 classes = ["Fight", "NonFight"]
-img_height, img_width = 400, 400
+img_height, img_width = 256, 256
 known_Y = True
 # known_Y = True if test or train
 
@@ -52,7 +52,7 @@ def frames_extraction(video_path):
             break
         if (count % 10) == 0:
             dyn_image = get_dynamic_image(frames_list, normalized=True)
-            cv2.imwrite("a.jpg", dyn_image)
+            # cv2.imwrite("a.jpg", dyn_image)
             dyn_image_list.append(dyn_image)
             frames_list.clear()
 
@@ -84,7 +84,7 @@ def create_data(input_dir, known_Y):
                     counter += 1
                 '''
 
-                if len(frames) == seq_len/2:
+                if len(frames) == seq_len/10:
                     X.append(frames)
                     y = [0] * len(classes)
                     y[classes.index(c)] = 1
@@ -96,7 +96,7 @@ def create_data(input_dir, known_Y):
             files_list.remove(".DS_Store")
         for f in files_list:
             frames = frames_extraction(os.path.join(input_dir, f))
-            if len(frames) == seq_len / 2:
+            if len(frames) == seq_len / 10:
                 X.append(frames)
 
     X = np.asarray(X)
@@ -113,7 +113,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.20, shuffl
 
 model = Sequential()
 model.add(ConvLSTM2D(filters=64, kernel_size=(3, 3), return_sequences=False, data_format="channels_last",
-                     input_shape=(int(seq_len/2), img_height, img_width, 3)))
+                     input_shape=(int(seq_len/10), img_height, img_width, 3)))
 model.add(Dropout(0.2))
 model.add(Flatten())
 model.add(Dense(512, activation="relu"))
