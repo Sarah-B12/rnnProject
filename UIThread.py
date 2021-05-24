@@ -9,16 +9,20 @@ import logging
 import threading
 import time
 import webbrowser
+import subprocess
 
 def link_tree(self):
     input_id = listBox.focus()
     current_item = listBox.item(input_id)
     current_path = current_item.get('values')[0]
     current_directory = os.getcwd()
-    full_file_path = current_directory + '\\video_forBD\\Fight_Tested\\' + str(current_path) + '.avi'
+    full_file_path = current_directory + '/video_forBD/Fight_Tested/' + str(current_path) + '.avi'
 
     #open file
-    webbrowser.open('{}'.format(full_file_path))
+    if os.name == 'nt':
+        webbrowser.open('{}'.format(full_file_path))
+    else:
+        subprocess.call(('open', full_file_path))
     # do whatever you want
 
 UI = tk.Tk()

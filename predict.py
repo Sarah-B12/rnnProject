@@ -81,10 +81,10 @@ def create_data(input_dir, known_Y):
 
 # returns a compiled model
 # identical to the previous one
-model = load_model('RNN_Project_96.h5')
+model = load_model('RNN_Project_test2.h5')
 
 # For the undecidable videos of the Mother code
-data_dir = "video_test_G/"
+data_dir = "video_pred/"
 while True:
     if not os.listdir(data_dir):  # if folder video_pred empty
         continue
