@@ -46,11 +46,11 @@ def UpdateList():
     while getattr(t, "do_run", True): #if 'do_run' == True - the thread is alive
         time.sleep(2)
         files = os.listdir(data_dir)
+        if ".DS_Store" in files:
+            files.remove(".DS_Store")
         if files:  # if folder Fight is not empty
             current_vid = files[0]
             current_vid_only_name = current_vid[:-4]
-
-
             #update the array with new values
             new_num1 = str(randint(0,1000))
             new_num2 = str(randint(0,1000))
