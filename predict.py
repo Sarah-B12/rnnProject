@@ -89,6 +89,8 @@ while True:
     if not os.listdir(data_dir):  # if folder video_pred empty
         continue
     X_unknown, files_list = create_data(data_dir, False)
+    if X_unknown.size == 0:
+        continue
     y_pred_unknown = model.predict(X_unknown)
     y_pred_unknown = np.argmax(y_pred_unknown, axis=1)
     i = 0
