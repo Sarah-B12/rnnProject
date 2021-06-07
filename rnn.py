@@ -21,7 +21,7 @@ from sklearn.metrics import cohen_kappa_score
 from sklearn.metrics import roc_auc_score
 from sklearn.metrics import multilabel_confusion_matrix
 
-data_dir = "video_data_3/"
+data_dir = "video_data_test/"
 seq_len = 150
 classes = ["Fight", "NonFight"]
 img_height, img_width = 256, 256
