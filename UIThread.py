@@ -27,7 +27,7 @@ def link_tree(self):
 
 UI = tk.Tk()
 label = tk.Label(UI, text="Fight Videos", font=("Arial", 30)).grid(row=0, columnspan=3)
-cols = ('Name of video', 'Why the video is violent')
+cols = ('Name of video', '')
 listBox = ttk.Treeview(UI, columns=cols, show='headings')
 for col in cols:
     listBox.heading(col, text=col)
@@ -54,7 +54,7 @@ def UpdateList():
             #update the array with new values
             new_num1 = str(randint(0,1000))
             new_num2 = str(randint(0,1000))
-            current_vid_results = ((current_vid_only_name, new_num2),)
+            current_vid_results = ((current_vid_only_name, ""),)
 
             for i, (name, score) in enumerate(current_vid_results, start=1):
                 listBox.insert("", "end", values=(name, score))
